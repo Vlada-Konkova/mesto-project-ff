@@ -8,7 +8,7 @@ const popupButtonProfileAdd = document.querySelector('.profile__add-button');
 const popups = document.querySelectorAll('.popup');
 // значение полей формы редактирования
 const popupEdit = document.querySelector('.popup_type_edit');
-const EditForm = popupEdit.querySelector(".popup__form");
+const editForm = popupEdit.querySelector(".popup__form");
 const popupEditNameInput = popupEdit.querySelector(".popup__input_type_name");
 const popupEditJobInput = popupEdit.querySelector(".popup__input_type_description");
 // Выберите элементы, куда должны быть вставлены значения полей редактирования
@@ -62,13 +62,12 @@ function handleFormEditSubmit(evt) {
    evt.preventDefault();
   profileTitle.textContent = popupEditNameInput.value;
   descriptionTitle.textContent = popupEditJobInput.value;
-  popupEdit.querySelector('.popup__button').addEventListener('submit', handleFormEditSubmit);
   closePopup(popupEdit);
 }
-EditForm.addEventListener('submit', handleFormEditSubmit); 
+editForm.addEventListener('submit', handleFormEditSubmit); 
 
 // функция добавления новой карточки
-function newCard(evt) {
+function handleAddNewCard(evt) {
   evt.preventDefault();
 
   const initialCard = [];
@@ -79,7 +78,7 @@ function newCard(evt) {
   placesList.prepend(cardElement);
   closePopup(popupCard);
 }
-cardForm.addEventListener('submit', newCard);
+cardForm.addEventListener('submit', handleAddNewCard);
 
 // функция открытия и закрытия изображения
 function handleImageClick(event) {
