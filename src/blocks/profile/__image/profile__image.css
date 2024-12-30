@@ -9,6 +9,22 @@
   margin: 0 29px 0 0;
 }
 
+.profile__avatar-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  transition: .3s ease-in-out;
+  background-position: center;
+}
+
+.profile__avatar-button:hover {
+  background: rgba(0, 0, 0, .8) url('../../../images/edit-icon.svg') center center no-repeat;
+  background-size: 26px 26px;
+  opacity: .6;
+}
+
 @media screen and (max-width: 740px) {
   .profile__image {
     margin: 0 10px 0 0;
