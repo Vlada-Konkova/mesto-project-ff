@@ -66,13 +66,7 @@ Promise.all([getUser (), getCards()])
 
     cardData.forEach((item) => {
       const cardElement = createCard(
-        {
-          cardTitle: item.name,
-          cardAlt: item.name,
-          cardLink: item.link,
-          cardLikeCounter: item.likes,
-          cardId: item._id,
-          ownerId: item.owner._id,
+        { item
         },
         userId, // Используем userId здесь
         (evt) => handleLike(evt, item._id), // Функция лайка

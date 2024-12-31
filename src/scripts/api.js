@@ -15,11 +15,11 @@ export const checkResponse = (result) => {
 
 export const getCards = () => {
 return fetch(`${config.baseUrl}/cards`, {
+  method: 'GET',  
   headers: config.headers,
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Данные карточек получены:", result);
     return result;
   })
 }
@@ -31,7 +31,6 @@ return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Лайк поставлен:", result);
     return result;
   })
 }
@@ -43,7 +42,6 @@ return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Лайк убран:", result);
     return result;
   })
 }
@@ -59,7 +57,6 @@ return fetch(`${config.baseUrl}/cards`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Данные новой карточки получены:", result);
     return result;
   })
 }
@@ -71,7 +68,6 @@ export const deleteCards = (cardId) => {
   })
   .then(checkResponse)
   .then(result => {
-      console.log("Карточка удалена:", result);
       return result;
   })
 }
@@ -83,7 +79,6 @@ return fetch(`${config.baseUrl}/users/me`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Данные пользователя получены:", result);
     return result;
   })
 }
@@ -98,7 +93,6 @@ return fetch(`${config.baseUrl}/users/me/avatar`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Данные обновлены:", result);
     return result;
   })
 }
@@ -114,7 +108,6 @@ return fetch(`${config.baseUrl}/users/me`, {
 })
   .then(checkResponse)
   .then(result => {
-    console.log("Данные обновлены:", result);
     return result;
   })
 };

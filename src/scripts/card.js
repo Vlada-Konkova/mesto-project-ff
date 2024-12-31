@@ -1,4 +1,3 @@
-import { initialCards } from './cards.js';
 import { cardTemplate } from './index.js';
 import { deleteCards, likeCard, dislikeCard } from './api.js';
 // Функция создания карточки
@@ -19,7 +18,6 @@ function createCard(cardData, userId, onLike, onDelete, onImage) {
   cardElement.querySelector(".card__image").src = cardLink;
   cardElement.querySelector(".card__like__counter").textContent =
     cardLikeCounter.length;
-  cardElement.dataset.id = cardId;
 
   const cardImage = cardElement.querySelector('.card__image');
 
