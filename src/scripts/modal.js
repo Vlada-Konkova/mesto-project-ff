@@ -1,27 +1,27 @@
 // @todo: Открытие модального окна
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_is-animated');
+export function openModal(popupElement) {
+  if (!popupElement.classList.contains('popup_is-animated')) {
+    popupElement.classList.add('popup_is-animated');
+  }
   popupElement.classList.add('popup_is-opened');
   document.addEventListener("keydown", closeEsc);
 }
 
 // @todo: Закрытие модального окна
-function closePopup(popupElement) {
+export function closeModal(popupElement) {
   popupElement.classList.add('popup_is-animated');
   popupElement.classList.remove('popup_is-opened');
   document.removeEventListener("keydown", closeEsc);
 }
 
-function closeEsc(evt) {
+export function closeEsc(evt) {
   if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_is-opened'));
+    closeModal(document.querySelector('.popup_is-opened'));
   }
 }
 
-function handleOverlayClick(evt) {
+export function handleOverlayClick(evt) {
   if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
+    closeModal(evt.target);
   };
 };
-
-export {openPopup, closePopup, closeEsc, handleOverlayClick};

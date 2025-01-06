@@ -10,11 +10,11 @@
 <body class="page">
 <div class="page__content">
   <header class="header page__section">
-    <img src="" alt="Логотип проекта масто" class="logo header__logo">
+    <img src="<%=require('./images/logo.svg')%>" alt="Логотип проекта масто" class="logo header__logo">
   </header>
   <main class="content">
     <section class="profile page__section">
-      <div class="profile__image">
+      <div class="profile__image" style="background-image: url(<%=require('./images/avatar.jpg')%>)">
         <button class="profile__avatar-button" type="button"></button>
       </div>
       <div class="profile__info">
@@ -34,6 +34,19 @@
       © 2021 Mesto Russia
     </p>
   </footer>
+  <div class="popup popup_type_avatar_edit">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <form class="popup__form" name="edit-avatar">
+          <input type="url" name="avatar" class="popup__input popup__input_type_avatar" placeholder="Ссылка на картинку" required
+            id="url-input"
+          />
+          <span class="popup__input_type_error url-input-error"></span>
+        <button type="submit" class="button popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <div class="popup popup_type_edit">
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
@@ -84,28 +97,6 @@
     </div>
   </div>
 </div>
-<div class="popup popup_type_avatar_edit">
-  <div class="popup__content">
-    <button type="button" class="popup__close"></button>
-    <h3 class="popup__title">Обновить аватар</h3>
-    <form class="popup__form" name="edit-avatar" novalidate>
-      <div class="form__field">
-        <input
-          type="url"
-          name="avatar"
-          class="popup__input popup__input_type_avatar"
-          placeholder="Ссылка на картинку"
-          required
-          minlength="2"
-          maxlength="30"
-          id="url-input"
-        />
-        <span class="popup__input_type_error url-input-error"></span>
-      </div>
-      <button type="submit" class="button popup__button">Сохранить</button>
-    </form>
-  </div>
-</div>
 
 <template id="card-template">
   <li class="places__item card">
@@ -113,9 +104,9 @@
     <button type="button" class="card__delete-button"></button>
     <div class="card__description">
       <h2 class="card__title"></h2>
-      <div class="card__like__block">
+      <div class="card__like__section">
       <button type="button" class="card__like-button"></button>
-      <span class="card__like__counter"></span>
+        <span class="card__like-count"></span>
       </div>
     </div>
   </li>
