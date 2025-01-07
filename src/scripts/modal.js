@@ -1,15 +1,21 @@
+// Функция для инициализации анимации
+function initAnimation(popupElement) {
+  popupElement.classList.add('popup_is-animated');
+}
+
+// Функция для инициализации модального окна
+export function initializeModal(popupElement) {
+  initAnimation(popupElement); // Добавляем класс анимации один раз
+}
+
 // @todo: Открытие модального окна
 export function openModal(popupElement) {
-  if (!popupElement.classList.contains('popup_is-animated')) {
-    popupElement.classList.add('popup_is-animated');
-  }
   popupElement.classList.add('popup_is-opened');
   document.addEventListener("keydown", closeEsc);
 }
 
 // @todo: Закрытие модального окна
 export function closeModal(popupElement) {
-  popupElement.classList.add('popup_is-animated');
   popupElement.classList.remove('popup_is-opened');
   document.removeEventListener("keydown", closeEsc);
 }

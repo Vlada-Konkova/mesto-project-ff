@@ -76,7 +76,6 @@ const clearValidation = (formElement, config) => {
 
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, config);
-    inputElement.value = ""; // Очищаем значение для новой формы
   });
 
   toggleButtonState(inputList, submitButton, config);

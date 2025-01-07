@@ -1,6 +1,6 @@
 import './pages/index.css';
 import './scripts/cards.js';
-import {openModal, closeModal, closeEsc, handleOverlayClick} from './scripts/modal.js';
+import {openModal, closeModal, closeEsc, handleOverlayClick, initializeModal} from './scripts/modal.js';
 import { createCard, handleCardDelete, handleLike} from './scripts/card.js';
 import { enableValidation , clearValidation } from './scripts/validation.js';
 import {getUser, getInitialCards, editProfile, postCard, updateAvatar} from './scripts/api.js';
@@ -25,7 +25,7 @@ const cardForm = popupCard.querySelector('.popup__form');
 const popupCardNameInput = popupCard.querySelector('.popup__input_type_card-name');
 const popupCardUrlInput = popupCard.querySelector('.popup__input_type_url');
 // элементы изображения
-const cardTemplate = document.querySelector('#card-template').content;
+
 const placesList = document.querySelector('.places__list');
 const popupImage = document.querySelector('.popup_type_image');
 const popupFullImage = popupImage.querySelector('.popup__image');
@@ -45,13 +45,14 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
+let userId;
 // @todo: Вывести данные пользователя и карточки на страницу
 Promise.all([getUser (), getInitialCards()])
   .then(([userData, cards]) => {
-    const userId = userData._id;
+    userId = userData._id;
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;
-    profileAvatar.src = userData.avatar;
+    profileAvatar.style.backgroundImage = `url('${userData.avatar}')`;
 
     // Вывод данных пользователя в консоль
     // console.log('Данные пользователя:', userData);
@@ -95,6 +96,7 @@ popupButtonProfileAdd.addEventListener('click', function () {
 });
 
 popups.forEach(popup => {
+  initializeModal(popup);
   popup.addEventListener('click', handleOverlayClick);
 
   popup.querySelector('.popup__close').addEventListener('click', () => {
@@ -123,7 +125,7 @@ function handleEditAvatar(evt) {
 
   updateAvatar(avatarUrl)
   .then(res => {
-    profileAvatar.src = res.avatar;
+    profileAvatar.style.backgroundImage = `url('${res.avatar}')`
     closeModal(popupAvatar);
   })
   .catch(error => {
@@ -177,10 +179,10 @@ function handleAddNewCard(evt) {
     link: popupCardUrlInput.value,
   };
 
-    // Отправляем новую карточку на сервер
-    postCard(newCardData)
+  // Отправляем новую карточку на сервер
+  postCard(newCardData)
     .then(cardData => {
-      const cardElement = createCard(cardData, handleCardDelete, handleLike, handleImageClick);
+      const cardElement = createCard(cardData, userId, handleCardDelete, handleLike, handleImageClick); // Передаем userId
       placesList.prepend(cardElement);
       closeModal(popupCard);
       cardForm.reset();
@@ -190,7 +192,7 @@ function handleAddNewCard(evt) {
     })
     .finally(() => {
       saveButton.textContent = "Создать"; 
-      saveButton.disabled = true; 
+      saveButton.disabled = false; 
     });
 }
 cardForm.addEventListener('submit', handleAddNewCard);
@@ -204,5 +206,3 @@ function handleImageClick(event) {
 }
 
 enableValidation(validationConfig);
-
-export {cardTemplate};
